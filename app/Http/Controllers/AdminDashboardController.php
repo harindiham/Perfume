@@ -13,9 +13,9 @@ class AdminDashboardController extends Controller
 
         $totalCategories = Category::count();
 
-        $activePerfumes = Perfume::where('is_active', true)->count();
+        $activePerfumes = Perfume::active()->count();
 
-        $lowStockPerfumes = Perfume::where('stock', '<=', 5)->count();
+        $lowStockPerfumes = Perfume::lowStock()->count();
 
         return view('admin.dashboard', [
             'totalPerfumes' => $totalPerfumes,

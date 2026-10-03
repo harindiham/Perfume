@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ExchangeRateController;
 use App\Http\Controllers\Api\PerfumeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::middleware(['auth:sanctum', 'abilities:perfumes:read'])->group(function (
     Route::get('/categories', [CategoryController::class, 'index']);
 
     Route::get('/categories/{category}/perfumes', [CategoryController::class, 'perfumes']);
+
+    Route::get('/exchange-rate', [ExchangeRateController::class, 'show']);
 });
 
 Route::middleware(['auth:sanctum', 'abilities:perfumes:write'])->group(function () {

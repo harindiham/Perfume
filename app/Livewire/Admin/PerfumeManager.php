@@ -44,10 +44,10 @@ class PerfumeManager extends Component
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|numeric|min:0',
             'size' => 'nullable|string|max:100',
-            'description' => 'nullable|string',
-            'top_notes' => 'nullable|string',
-            'middle_notes' => 'nullable|string',
-            'base_notes' => 'nullable|string',
+            'description' => 'nullable|string|max:5000',
+'top_notes' => 'nullable|string|max:1000',
+'middle_notes' => 'nullable|string|max:1000',
+'base_notes' => 'nullable|string|max:1000',
 
             // Existing database image path
             'image' => 'nullable|string|max:255',
@@ -105,9 +105,9 @@ class PerfumeManager extends Component
         $validated = $this->validate();
 
         /*
-        |--------------------------------------------------------------------------
+        
         | Upload New Image
-        |--------------------------------------------------------------------------
+        
         */
 
         if ($this->imageUpload) {

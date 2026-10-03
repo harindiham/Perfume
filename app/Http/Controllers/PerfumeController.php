@@ -10,7 +10,7 @@ class PerfumeController extends Controller
     public function index()
     {
         $perfumes = Perfume::with('category')
-            ->where('is_active', true)
+            ->active()
             ->latest()
             ->get();
 
@@ -30,35 +30,35 @@ class PerfumeController extends Controller
 
 
     public function category($id)
-{
-    $category = Category::findOrFail($id);
+    {
+        $category = Category::findOrFail($id);
 
-    $perfumes = Perfume::with('category')
-        ->where('category_id', $category->id)
-        ->where('is_active', true)
-        ->latest()
+        $perfumes = Perfume::with('category')
+            ->active()
+            ->byCategory($category->id)
+            ->latest()
+            ->get();
+
+        $categories = Category::withCount([
+            'perfumes' => function ($query) {
+                $query->where('is_active', true);
+            }
+        ])
+        ->orderBy('name')
         ->get();
 
-    $categories = Category::withCount([
-        'perfumes' => function ($query) {
-            $query->where('is_active', true);
-        }
-    ])
-    ->orderBy('name')
-    ->get();
-
-    return view('perfumes.category', [
-        'category' => $category,
-        'perfumes' => $perfumes,
-        'categories' => $categories,
-    ]);
-}
+        return view('perfumes.index', [
+            'category' => $category,
+            'perfumes' => $perfumes,
+            'categories' => $categories,
+        ]);
+    }
 
 
     public function show($id)
     {
         $perfume = Perfume::with('category')
-            ->where('is_active', true)
+            ->active()
             ->findOrFail($id);
 
         return view('perfumes.show', [

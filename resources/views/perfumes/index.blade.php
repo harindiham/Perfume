@@ -48,7 +48,7 @@
                     @foreach ($categories as $category)
 
                         <a
-                            href="{{ route('perfumes.category', ['id' => $category->id]) }}"
+                            href="{{ route('perfumes.category', ['id' => $category->id]) }}#products"
                             class="text-[10px] uppercase tracking-[0.2em] transition hover:opacity-50">
                             {{ $category->name }}
                         </a>
@@ -207,12 +207,33 @@
 
 
         {{-- Products --}}
-        <section class="mx-auto max-w-[1600px] px-6 py-12 lg:px-12 lg:py-20">
+       <section class="mx-auto max-w-[1600px] px-6 py-12 lg:px-12 lg:py-20">
 
-            @if ($perfumes->count())
+    @if (isset($category))
 
-                <div class="grid grid-cols-1 gap-px bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="mb-10 border-b border-black/10 pb-6">
 
+            <p class="text-[10px] uppercase tracking-[0.3em] text-black/40">
+                Category
+            </p>
+
+            <h2 class="mt-3 text-4xl font-light tracking-[-0.05em]">
+                {{ $category->name }}
+            </h2>
+
+            @if ($category->description)
+                <p class="mt-4 max-w-xl text-sm leading-6 text-black/50">
+                    {{ $category->description }}
+                </p>
+            @endif
+
+        </div>
+
+    @endif
+
+@if ($perfumes->count())
+
+    <div id="products" class="scroll-mt-24 grid grid-cols-1 gap-px bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
 
                     @foreach ($perfumes as $perfume)
 
@@ -382,7 +403,7 @@
                     @foreach ($categories as $category)
 
                         <a
-                            href="{{ route('perfumes.category', ['id' => $category->id]) }}"
+                            href="{{ route('perfumes.category', ['id' => $category->id]) }}#products"
                             class="group border-b border-r border-black/10 p-7 transition hover:bg-black hover:text-white lg:p-8">
 
 

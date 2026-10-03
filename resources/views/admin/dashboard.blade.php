@@ -17,28 +17,38 @@
         <header class="border-b border-black/15">
             <div class="flex items-center justify-between px-6 py-5 lg:px-12">
 
+                {{-- Logo --}}
                 <a href="{{ route('admin.dashboard') }}"
-                   class="text-xl font-semibold tracking-[-0.04em]">
+                   class="text-xl font-semibold tracking-[-0.04em] transition-opacity hover:opacity-60">
                     PERFUME
                 </a>
 
+
+                {{-- Main navigation --}}
                 <nav class="hidden items-center gap-8 text-[10px] uppercase tracking-[0.18em] md:flex">
+
+                    {{-- Dashboard --}}
                     <a href="{{ route('admin.dashboard') }}"
-                       class="border-b border-black pb-1">
+                       class="border-b border-black pb-1 transition-opacity hover:opacity-60">
                         Dashboard
                     </a>
 
-                    <a href="#"
-                       class="text-black/50 hover:text-black">
+                    {{-- Perfumes --}}
+                    <a href="{{ route('admin.perfumes') }}"
+                       class="text-black/50 transition hover:text-black">
                         Perfumes
                     </a>
 
-                    <a href="#"
-                       class="text-black/50 hover:text-black">
+                    {{-- Categories --}}
+                    <a href="{{ route('admin.categories') }}"
+                       class="text-black/50 transition hover:text-black">
                         Categories
                     </a>
+
                 </nav>
 
+
+                {{-- User section --}}
                 <div class="flex items-center gap-5 text-[10px] uppercase tracking-[0.15em]">
 
                     <span class="hidden sm:block">
@@ -49,12 +59,13 @@
                         @csrf
 
                         <button type="submit"
-                                class="hover:underline">
+                                class="transition-opacity hover:opacity-60">
                             Logout
                         </button>
                     </form>
 
                 </div>
+
             </div>
         </header>
 
@@ -65,9 +76,11 @@
             {{-- Intro --}}
             <section class="grid min-h-[420px] grid-cols-1 border-b border-black/15 lg:grid-cols-2">
 
+                {{-- Left introduction --}}
                 <div class="flex items-center border-b border-black/15 px-6 py-16 lg:border-b-0 lg:border-r lg:px-16">
 
                     <div>
+
                         <p class="mb-6 text-[10px] uppercase tracking-[0.25em] text-black/50">
                             Administration
                         </p>
@@ -82,11 +95,13 @@
                             Manage the perfume catalogue, product information,
                             categories and stock from one place.
                         </p>
+
                     </div>
 
                 </div>
 
 
+                {{-- Right welcome panel --}}
                 <div class="flex items-end bg-black p-6 text-white lg:p-16">
 
                     <div class="w-full">
@@ -113,6 +128,7 @@
             {{-- Statistics --}}
             <section>
 
+                {{-- Overview heading --}}
                 <div class="border-b border-black/15 px-6 py-5 lg:px-12">
                     <p class="text-[10px] uppercase tracking-[0.25em] text-black/50">
                         Overview
@@ -120,11 +136,15 @@
                 </div>
 
 
+                {{-- Statistics cards --}}
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
 
+
                     {{-- Total perfumes --}}
-                    <div class="border-b border-black/15 p-8 lg:border-r">
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-black/50">
+                    <a href="{{ route('admin.perfumes') }}"
+                       class="group border-b border-black/15 p-8 transition-colors duration-300 hover:bg-black hover:text-white lg:border-r">
+
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-black/50 transition-colors group-hover:text-white/50">
                             Total Perfumes
                         </p>
 
@@ -132,15 +152,22 @@
                             {{ $totalPerfumes }}
                         </p>
 
-                        <p class="mt-4 text-xs text-black/50">
+                        <p class="mt-4 text-xs text-black/50 transition-colors group-hover:text-white/50">
                             Products in catalogue
                         </p>
-                    </div>
+
+                        <p class="mt-8 text-[10px] uppercase tracking-[0.2em] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            View Perfumes →
+                        </p>
+
+                    </a>
 
 
                     {{-- Categories --}}
-                    <div class="border-b border-black/15 p-8 lg:border-r">
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-black/50">
+                    <a href="{{ route('admin.categories') }}"
+                       class="group border-b border-black/15 p-8 transition-colors duration-300 hover:bg-black hover:text-white lg:border-r">
+
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-black/50 transition-colors group-hover:text-white/50">
                             Categories
                         </p>
 
@@ -148,15 +175,22 @@
                             {{ $totalCategories }}
                         </p>
 
-                        <p class="mt-4 text-xs text-black/50">
+                        <p class="mt-4 text-xs text-black/50 transition-colors group-hover:text-white/50">
                             Available categories
                         </p>
-                    </div>
+
+                        <p class="mt-8 text-[10px] uppercase tracking-[0.2em] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            View Categories →
+                        </p>
+
+                    </a>
 
 
-                    {{-- Active --}}
-                    <div class="border-b border-black/15 p-8 lg:border-r">
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-black/50">
+                    {{-- Active perfumes --}}
+                    <a href="{{ route('admin.perfumes') }}"
+                       class="group border-b border-black/15 p-8 transition-colors duration-300 hover:bg-black hover:text-white lg:border-r">
+
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-black/50 transition-colors group-hover:text-white/50">
                             Active
                         </p>
 
@@ -164,15 +198,22 @@
                             {{ $activePerfumes }}
                         </p>
 
-                        <p class="mt-4 text-xs text-black/50">
+                        <p class="mt-4 text-xs text-black/50 transition-colors group-hover:text-white/50">
                             Published perfumes
                         </p>
-                    </div>
+
+                        <p class="mt-8 text-[10px] uppercase tracking-[0.2em] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            View Perfumes →
+                        </p>
+
+                    </a>
 
 
                     {{-- Low stock --}}
-                    <div class="border-b border-black/15 p-8">
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-black/50">
+                    <a href="{{ route('admin.perfumes') }}"
+                       class="group border-b border-black/15 p-8 transition-colors duration-300 hover:bg-black hover:text-white">
+
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-black/50 transition-colors group-hover:text-white/50">
                             Low Stock
                         </p>
 
@@ -180,10 +221,15 @@
                             {{ $lowStockPerfumes }}
                         </p>
 
-                        <p class="mt-4 text-xs text-black/50">
+                        <p class="mt-4 text-xs text-black/50 transition-colors group-hover:text-white/50">
                             Products requiring attention
                         </p>
-                    </div>
+
+                        <p class="mt-8 text-[10px] uppercase tracking-[0.2em] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            Review Stock →
+                        </p>
+
+                    </a>
 
                 </div>
 
@@ -193,10 +239,13 @@
             {{-- Quick actions --}}
             <section class="grid grid-cols-1 lg:grid-cols-2">
 
-                <a href="#"
-                   class="group flex min-h-[220px] items-end border-b border-black/15 p-8 transition-colors hover:bg-black hover:text-white lg:border-r lg:p-12">
+
+                {{-- Manage perfumes --}}
+                <a href="{{ route('admin.perfumes') }}"
+                   class="group flex min-h-[220px] items-end border-b border-black/15 p-8 transition-colors duration-300 hover:bg-black hover:text-white lg:border-r lg:p-12">
 
                     <div>
+
                         <p class="mb-5 text-[10px] uppercase tracking-[0.25em] opacity-50">
                             Catalogue
                         </p>
@@ -212,15 +261,18 @@
                         <span class="mt-8 inline-block text-[10px] uppercase tracking-[0.2em]">
                             View Catalogue →
                         </span>
+
                     </div>
 
                 </a>
 
 
-                <a href="#"
-                   class="group flex min-h-[220px] items-end border-b border-black/15 p-8 transition-colors hover:bg-black hover:text-white lg:p-12">
+                {{-- Manage categories --}}
+                <a href="{{ route('admin.categories') }}"
+                   class="group flex min-h-[220px] items-end border-b border-black/15 p-8 transition-colors duration-300 hover:bg-black hover:text-white lg:p-12">
 
                     <div>
+
                         <p class="mb-5 text-[10px] uppercase tracking-[0.25em] opacity-50">
                             Organisation
                         </p>
@@ -236,6 +288,7 @@
                         <span class="mt-8 inline-block text-[10px] uppercase tracking-[0.2em]">
                             View Categories →
                         </span>
+
                     </div>
 
                 </a>
@@ -245,8 +298,15 @@
 
             {{-- Footer --}}
             <footer class="flex flex-col justify-between gap-4 px-6 py-8 text-[9px] uppercase tracking-[0.2em] text-black/40 sm:flex-row lg:px-12">
-                <span>Perfume Store</span>
-                <span>Administration Panel</span>
+
+                <span>
+                    Perfume Store
+                </span>
+
+                <span>
+                    Administration Panel
+                </span>
+
             </footer>
 
         </main>
