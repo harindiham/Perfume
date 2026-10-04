@@ -73,6 +73,11 @@ RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' \
     /etc/apache2/sites-available/000-default.conf \
     /etc/apache2/apache2.conf
 
+RUN echo '<Directory /var/www/html/public/storage>' >> /etc/apache2/apache2.conf \
+    && echo '    Options FollowSymLinks' >> /etc/apache2/apache2.conf \
+    && echo '    Require all granted' >> /etc/apache2/apache2.conf \
+    && echo '</Directory>' >> /etc/apache2/apache2.conf
+
 # Laravel storage permissions
 RUN mkdir -p storage/framework/cache \
     storage/framework/sessions \
