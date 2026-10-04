@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Category;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
 
 class CategoryManager extends Component
 {
@@ -16,13 +17,24 @@ class CategoryManager extends Component
     public $description = '';
 
 
-    protected function rules()
-    {
-        return [
-            'name' => 'required|string|max:255|unique:categories,name,' . $this->editingId,
-            'description' => 'nullable|string',
-        ];
+ protected function rules()
+{
+    $nameRule = Rule::unique('categories', 'name');
+
+    if ($this->editingId) {
+        $nameRule->ignore($this->editingId);
     }
+
+    return [
+        'name' => [
+            'required',
+            'string',
+            'max:255',
+            $nameRule,
+        ],
+        'description' => 'nullable|string',
+    ];
+}
 
 
     public function create()
