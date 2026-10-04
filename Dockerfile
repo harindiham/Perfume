@@ -56,6 +56,9 @@ RUN apt-get update && apt-get install -y \
 # Copy Laravel application
 COPY --from=composer-builder /app /var/www/html
 
+# Do not include local development environment configuration
+RUN rm -f /var/www/html/.env
+
 # Copy Vite production assets
 COPY --from=node-builder /app/public/build /var/www/html/public/build
 
